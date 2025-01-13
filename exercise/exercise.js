@@ -35,8 +35,9 @@ set their font size to 18px.
 
 let font18 = document.querySelectorAll('.article-text');
 font18.forEach((element) => {
-	element.setAttribute("style" , "color: purple");
-	element.setAttribute("font" , "size: 18px");
+	//element.setAttribute("style" , "color: red");
+	//element.setAttribute("font" , "size: 18px");
+	element.style.fontSize = "48px";
 });
 
 
@@ -50,11 +51,9 @@ Select the element with ID 'introduction' and access its parent node.
 Log the parent node's tag name to the console.
 */
 
-placeholder = `Delete this 
-									block 
-									and 
-									code 
-									here`;
+let introParent = document.getElementById('introduction').parentNode;
+console.log("Parent Node Tag:", introParent.tagName);
+
 
 /*
 Exercise 5: Accessing Child Nodes
@@ -65,11 +64,13 @@ Select the <ul> with ID 'item-list' and log the number of
 its child elements to the console.
 */
 
-placeholder = `Delete this 
-									block 
-									and 
-									code 
-									here`;
+let listChildren = document.querySelector('ul' , 'item-list').childNodes;
+
+	console.log(listChildren.length);
+	
+	/*listChildren.forEach((e) => {
+		console.log(e.length);
+	});*/
 
 /*
 Exercise 6: Updating Inner HTML
@@ -80,26 +81,20 @@ Change the inner HTML of the element with ID 'introduction' to
 include a new paragraph saying "This content has been updated!".
 */
 
-placeholder = `Delete this 
-									block 
-									and 
-									code 
-									here`;
+let newInner = document.getElementById('introduction');
+	newInner.innerHTML += ("<p>This content has been updated!</p>");
 
-/*
-Exercise 7: Changing Attributes with setAttribute
+
+/*Exercise 7: Changing Attributes with setAttribute
 
 Description: 
 
 Assume there's an image with ID 'main-image' in your HTML. 
-Change its src attribute to point "image2.png".
-*/
+Change its src attribute to point "image2.png". */
 
-placeholder = `Delete this 
-									block 
-									and 
-									code 
-									here`;
+
+let image = document.getElementById('main-image');
+	image.setAttribute("src", "./image2.png");
 
 /*
 Exercise 8: Adding an Event Listener
@@ -110,14 +105,24 @@ Add an event listener to the button with ID 'alert-button' that
 shows an alert with the message "Button Clicked!" when clicked.
 */
 
-placeholder = `Delete this 
-									block 
-									and 
-									code 
-									here`;
+ let button = document.getElementById('alert-button');
+	/*button.addEventListener(
+	"click",
+	() => {
+	alert("Button Clicked!")
+	}); */
+	
+	button.addEventListener(
+	"click",
+	clicked)
+	
+	function clicked() {
+		alert("Button Clicked!");
+	}
+	
 
-/*
-Exercise 9: Removing an Event Listener
+
+/*Exercise 9: Removing an Event Listener
 
 Description: 
 
@@ -127,14 +132,21 @@ In this file, add an event listener to the button with ID 'alert-button' that
 shows an alert when clicked. 
 
 Then, remove the event listener so that clicking the button no longer 
-shows the alert after 5 seconds.
-*/
+shows the alert after 5 seconds. */
 
-placeholder = `Delete this 
-									block 
-									and 
-									code 
-									here`;
+
+/*let button = document.getElementById('alert-button');
+	button.addEventListener(
+	"click",
+	clicked)
+	
+	function clicked() {
+		alert("Button Clicked!");
+	}*/
+	setTimeout(() => {
+		button.removeEventListener("click", clicked);
+	} , 5000);
+	
 
 /*
 Exercise 10: Handling Keyboard Events
@@ -145,11 +157,12 @@ Add an event listener to the document that logs the
 key and code of any key pressed by the user.
 */
 
-placeholder = `Delete this 
-									block 
-									and 
-									code 
-									here`;
+let whatKey = document.addEventListener(
+	"keyup",
+	(e) => {
+		console.log(e.key, e.code)
+	}
+	);
 
 /*
 Exercise 11: Event Propagation
@@ -164,11 +177,23 @@ In each event handler, log a message indicating which element was clicked.
 Observe event bubbling.
 */
 
-placeholder = `Delete this 
-									block 
-									and 
-									code 
-									here`;
+let bubbleTest = document.querySelector('#interactive');
+let bubbleTest2 = document.querySelector('#color-button')
+	bubbleTest.addEventListener(
+	"click", 
+	(e) => {
+	console.log("interactive button clicked");
+	});
+	
+	/*bubbleTest2.addEventListener(
+	"click", 
+	(e) => {
+	console.log("color button clicked");
+	});*/
+
+
+
+
 
 /*
 Exercise 12: Stopping Event Propagation
@@ -178,12 +203,13 @@ Description:
 Modify the previous exercise to prevent the click event on 
 the button from bubbling up to the section.
 */
+bubbleTest2.addEventListener(
+	"click", 
+	(e) => {
+	console.log("color button clicked");
+	event.stopPropagation();
+	});
 
-placeholder = `Delete this 
-									block 
-									and 
-									code 
-									here`;
 
 /*
 Exercise 13: Using console.log for Debugging
