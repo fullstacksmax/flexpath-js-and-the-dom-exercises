@@ -203,12 +203,12 @@ Description:
 Modify the previous exercise to prevent the click event on 
 the button from bubbling up to the section.
 */
-bubbleTest2.addEventListener(
+/* bubbleTest2.addEventListener(
 	"click", 
 	(e) => {
 	console.log("color button clicked");
 	event.stopPropagation();
-	});
+	}); */
 
 
 /*
@@ -221,12 +221,14 @@ log the current background color of the button before changing
 it to light green.
 */
 
-placeholder = `Delete this 
-									block 
-									and 
-									code 
-									here`;
-
+bubbleTest2.addEventListener(
+	"click", 
+	(e) => {
+	console.log("color button clicked");
+	console.log(`button color is ${bubbleTest2.style.backgroundColor}`);
+	bubbleTest2.style.backgroundColor = "lightgreen";
+	event.stopPropagation();
+	});
 /*
 Exercise 14: Creating and Appending New Elements
 
@@ -236,11 +238,12 @@ Create a new <li> element with the text "Item 4" and append it to
 the <ul> with ID 'item-list'.
 */
 
-placeholder = `Delete this 
-									block 
-									and 
-									code 
-									here`;
+let newList = document.getElementById('item-list');
+	newList.innerHTML += "<li>Item 4 </li>"
+	
+let textContent = document.createElement("li")
+	textContent.innerHTML = "item 5"
+	newList.appendChild(textContent);
 
 /*
 Exercise 15: Removing Elements from the DOM
@@ -249,13 +252,8 @@ Description:
 
 Remove the first <li> element from the <ul> with ID 'item-list'.
 */
-
-placeholder = `Delete this 
-									block 
-									and 
-									code 
-									here`;
-
+let garbage = newList.firstElementChild;
+newList.removeChild(garbage);
 /*
 Exercise 16: Using classList.add
 
@@ -265,11 +263,11 @@ Add a class 'highlight' to all <p> elements inside the
 section with ID 'content'.
 */
 
-placeholder = `Delete this 
-									block 
-									and 
-									code 
-									here`;
+
+let highlight = document.querySelectorAll("#content p")
+	highlight.forEach((e) => {
+		e.classList.add('highlight');
+	});
 
 /*
 Exercise 17: Using classList.toggle
@@ -280,11 +278,12 @@ Add a click event listener to the button with ID 'color-button' that
 toggles the class 'active' on itself.
 */
 
-placeholder = `Delete this 
-									block 
-									and 
-									code 
-									here`;
+let colorButton = document.getElementById('color-button');
+	colorButton.addEventListener(
+		"click",
+		() => {
+			colorButton.classList.toggle('active');
+		})
 
 /*
 Exercise 18: Preventing Default Behavior
@@ -295,11 +294,16 @@ Add a submit event listener to the form with ID 'input-form' that
 prevents the form from submitting and logs the input value to the console.
 */
 
-placeholder = `Delete this 
-									block 
-									and 
-									code 
-									here`;
+let inputForm = document.getElementById('input-form');
+	inputForm.addEventListener(
+	"submit",
+	((e) => {
+		e.preventDefault();
+		inputText = document.getElementById('input-text');
+		console.log(inputText.value);
+	}))
+		
+		
 
 /*
 Exercise 19: Simple Drag and Drop
@@ -310,11 +314,38 @@ Make the element with ID 'drag-source' draggable and implement
 drag and drop functionality to move it to the element with ID 'drop-target'.
 */
 
-placeholder = `Delete this 
-									block 
-									and 
-									code 
-									here`;
+let dragStart = document.getElementById('drag-source')
+let dragEnd = document.getElementById('drop-target')
+	dragStart.draggable = "true";
+	
+	dragEnd.addEventListener(
+	"dragenter",
+	(e) => {
+		e.preventDefault()
+	})
+	
+	dragEnd.addEventListener(
+	"dragover",
+	(e) => {
+		e.preventDefault()
+	})
+	
+	dragStart.addEventListener(
+	"dragstart",
+	(e) => {
+		e.dataTransfer.setData("text/plain", event.target.id)
+	})
+	
+	dragEnd.addEventListener(
+	"drop",
+	(e) => {
+	e.preventDefault()
+	const data = e.dataTransfer.getData("text/plain", e.target.innerText)
+	const draggedElement = document.getElementById(data);
+	dragEnd.appendChild(draggedElement);
+	});
+	
+	
 
 /*
 Exercise 20: Using dataTransfer in Drag and Drop
