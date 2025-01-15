@@ -333,7 +333,8 @@ let dragEnd = document.getElementById('drop-target')
 	dragStart.addEventListener(
 	"dragstart",
 	(e) => {
-		e.dataTransfer.setData("text/plain", event.target.id)
+		e.dataTransfer.setData("text/plain", e.target.id)
+		e.dataTransfer.setData("custom/message", "this is a great message")
 	})
 	
 	dragEnd.addEventListener(
@@ -343,6 +344,8 @@ let dragEnd = document.getElementById('drop-target')
 	const data = e.dataTransfer.getData("text/plain", e.target.innerText)
 	const draggedElement = document.getElementById(data);
 	dragEnd.appendChild(draggedElement);
+	const myMessage = e.dataTransfer.getData("custom/message")
+	console.log(myMessage);
 	});
 	
 	
@@ -358,11 +361,8 @@ in the previous exercise.
 For example, pass a message and log it when the drop occurs.
 */
 
-placeholder = `Delete this 
-									block 
-									and 
-									code 
-									here`;
+// see exercise 20
+
 
 /*
 Exercise 21: Cloning Nodes
@@ -373,12 +373,10 @@ Clone the element with ID 'main-title' and
 append the clone to the <footer> element.
 */
 
-placeholder = `Delete this 
-									block 
-									and 
-									code 
-									here`;
-
+let original = document.getElementById('main-title')
+let clone = original.cloneNode(true)
+let theFoot = document.querySelector('footer')
+theFoot.appendChild(clone);
 /*
 Exercise 22: Modifying Styles with JavaScript
 
@@ -388,11 +386,22 @@ Change the background color of the <body> when the
 user moves the mouse over the <header> element.
 */
 
-placeholder = `Delete this 
-									block 
-									and 
-									code 
-									here`;
+let header = document.querySelector('header')
+const body = document.querySelector('body')
+
+header.addEventListener(
+	"mouseover",
+	(e) => {
+		//const body = document.querySelector('body')
+		body.style.backgroundColor = 'yellow'
+	}
+)
+header.addEventListener(
+	"mouseleave",
+	(e) => {
+		body.style.backgroundColor = ''
+	}
+)
 
 /*
 Exercise 23: Debouncing Function Calls
@@ -404,11 +413,15 @@ new window size after the user stops resizing the browser window for
 500 milliseconds.
 */
 
-placeholder = `Delete this 
-									block 
-									and 
-									code 
-									here`;
+window.addEventListener(
+	"resize",
+	() => {
+		setTimeout(() => {
+		console.log(`the current window size is ${window.innerWidth} x ${window.innerHeight}`)
+
+		}, 500);
+	}
+)
 
 /*
 Exercise 24: Optimizing DOM Manipulations
