@@ -227,7 +227,7 @@ bubbleTest2.addEventListener(
 	console.log("color button clicked");
 	console.log(`button color is ${bubbleTest2.style.backgroundColor}`);
 	bubbleTest2.style.backgroundColor = "lightgreen";
-	event.stopPropagation();
+	e.stopPropagation();
 	});
 /*
 Exercise 14: Creating and Appending New Elements
@@ -434,11 +434,28 @@ using a DocumentFragment. You can create one by using:
 `document.createDocumentFragment()`
 */
 
-placeholder = `Delete this 
-									block 
-									and 
-									code 
-									here`;
+let i = 6;
+
+const fragment = document.createDocumentFragment();
+const numbers = [];
+while(i <= 105) {
+	numbers.push(i)
+	i += 1;
+	console.log(i);
+}
+
+numbers.forEach((e) => {
+	const li = document.createElement("li");
+	li.textContent = "item " + numbers[e-6];
+	fragment.appendChild(li);
+	console.log("numbers for each")
+})
+
+newList.appendChild(fragment);
+
+console.log(fragment);
+
+
 
 /*
 Exercise 25: Using Event Delegation
@@ -450,8 +467,13 @@ add a single event listener to 'item-list' that logs the
 text of the clicked list item.
 */
 
-placeholder = `Delete this 
-									block 
-									and 
-									code 
-									here`;
+let megaList = document.querySelectorAll('#item-list li')
+
+megaList.forEach((e) => {
+	e.addEventListener(
+		"click",
+		() => {
+		console.log(e.innerText)
+		}
+	)
+})
